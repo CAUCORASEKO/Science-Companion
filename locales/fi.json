@@ -7,6 +7,7 @@
   "chemistry": "Kemia · tulossa",
   "language": "Kieli",
   "category": "Luokka",
+  "categories": {"length": "Pituus", "area": "Pinta-ala", "volume": "Tilavuus", "capacity": "Vetoisuus", "mass": "Massa", "time": "Aika", "temperature": "Lämpötila", "speed": "Nopeus"},
   "length": "Pituus",
   "value": "Arvo",
   "from_unit": "Mistä",
@@ -39,6 +40,13 @@
     "cm": "Senttimetri (cm)",
     "mm": "Millimetri (mm)",
     "um": "Mikrometri (µm)",
-    "nm": "Nanometri (nm)"
+    "nm": "Nanometri (nm)",
+    "km²": "Neliökilometri (km²)", "hm²": "Neliöhehtometri (hm²)", "dam²": "Neliödekametri (dam²)", "m²": "Neliömetri (m²)", "dm²": "Neliödesimetri (dm²)", "cm²": "Neliösenttimetri (cm²)", "mm²": "Neliömillimetri (mm²)",
+    "km³": "Kuutiokilometri (km³)", "hm³": "Kuutihehtometri (hm³)", "dam³": "Kuutiodekametri (dam³)", "m³": "Kuutiometri (m³)", "dm³": "Kuutiosenttidesimetri (dm³)", "cm³": "Kuutiosenttimetri (cm³)", "mm³": "Kuutiomillimetri (mm³)",
+    "kL": "Kilolitra (kL)", "hL": "Hektolitra (hL)", "daL": "Dekalitra (daL)", "L": "Litra (L)", "dL": "Desilitra (dL)", "cL": "Senttilitra (cL)", "mL": "Millilitra (mL)",
+    "t": "Tonna (t)", "kg": "Kilogramma (kg)", "hg": "Hehtogramma (hg)", "dag": "Dekagramma (dag)", "g": "Gramma (g)", "dg": "Desigramma (dg)", "cg": "Sentigramma (cg)", "mg": "Milligramma (mg)", "ug": "Mikrogramma (µg)",
+    "day": "Päivä", "hour": "Tunti", "minute": "Minuutti", "second": "Sekunti", "millisecond": "Millisekunti (ms)", "microsecond": "Mikrosekunti (µs)",
+    "celsius": "Celsiusaste (°C)", "fahrenheit": "Fahrenheitaste (°F)", "kelvin": "Kelvin (K)",
+    "mps": "Metriä sekunnissa (m/s)", "kmh": "Kilometriä tunnissa (km/h)", "mph": "Mailia tunnissa (mph)", "fts": "Jalkaa sekunnissa (ft/s)", "knot": "Solmu (kn)"
   }
 }

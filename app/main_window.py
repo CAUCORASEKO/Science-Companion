@@ -8,8 +8,9 @@ from PySide6.QtWidgets import (
 )
 
 from app.theme import THEME
-from core.conversion_engine import LENGTH_FACTORS_IN_METERS, convert_length
-from core.explanations import build_length_explanation
+from core.conversion_engine import convert
+from core.conversion_registry import CATEGORIES, category_codes
+from core.explanations import build_explanation
 from core.decimal_utils import parse_decimal
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,8 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.current_language = "es"
         self.translations: dict = {}
-        self.unit_codes = list(LENGTH_FACTORS_IN_METERS)
+        self.unit_codes = []
+        self.current_category = "length"
         self._build_ui()
         self._load_language("es")
 
@@ -61,6 +63,7 @@ class MainWindow(QMainWindow):
         content = QVBoxLayout(); content.setSpacing(14); body.addLayout(content, 1)
         controls = self._card(); grid = QGridLayout(controls); grid.setContentsMargins(20, 18, 20, 18); grid.setHorizontalSpacing(12); grid.setVerticalSpacing(10)
         self.category_label = QLabel(); self.category_label.setObjectName("eyebrow"); self.category_combo = QComboBox()
+        self.category_combo.currentIndexChanged.connect(self._on_category_changed)
         grid.addWidget(self.category_label, 0, 0); grid.addWidget(self.category_combo, 0, 1, 1, 3)
         self.value_label = QLabel(); self.value_label.setObjectName("eyebrow"); self.value_input = QLineEdit(); self.value_input.returnPressed.connect(self.calculate)
         grid.addWidget(self.value_label, 1, 0); grid.addWidget(self.value_input, 1, 1, 1, 3)
@@ -96,8 +99,15 @@ class MainWindow(QMainWindow):
         self.category_label.setText(t["category"]); self.value_label.setText(t["value"]); self.value_input.setPlaceholderText(t["enter_value"]); self.from_label.setText(t["from_unit"]); self.to_label.setText(t["to_unit"])
         self.calculate_button.setText(t["calculate"]); self.clear_button.setText(t["clear"]); self.copy_button.setText(t["copy"]); self.copy_button.setToolTip(t["copy"]); self.swap_button.setToolTip(t["swap_tooltip"])
         self.result_heading.setText(t["result"]); self.formula_heading.setText(t["relationship"]); self.calculation_heading.setText(t["calculation"]); self.note_heading.setText(t["learning_note"])
-        selected_from = self.from_combo.currentData() or "m"; selected_to = self.to_combo.currentData() or "cm"
-        self.category_combo.clear(); self.category_combo.addItem(t["length"], "length"); self._populate(self.from_combo, selected_from); self._populate(self.to_combo, selected_to)
+        selected_category = self.current_category
+        self.category_combo.blockSignals(True); self.category_combo.clear()
+        for code in category_codes(): self.category_combo.addItem(t["categories"][code], code)
+        self.category_combo.setCurrentIndex(self.category_combo.findData(selected_category)); self.category_combo.blockSignals(False)
+        self.unit_codes = list(CATEGORIES[selected_category].unit_codes)
+        defaults = CATEGORIES[selected_category].defaults
+        selected_from = self.from_combo.currentData() if self.from_combo.currentData() in self.unit_codes else defaults[0]
+        selected_to = self.to_combo.currentData() if self.to_combo.currentData() in self.unit_codes else defaults[1]
+        self._populate(self.from_combo, selected_from); self._populate(self.to_combo, selected_to)
         if not self.result_value.text(): self.result_value.setText(t["result_empty"]); self.note_value.setText(t["empty_state"])
         elif self.value_input.text().strip() and self.copy_button.isEnabled(): self.calculate()
         self.statusBar().showMessage(t["ready"])
@@ -111,13 +121,18 @@ class MainWindow(QMainWindow):
         code = self.language_combo.currentData()
         if code: self._load_language(code)
 
+    def _on_category_changed(self) -> None:
+        self.current_category = self.category_combo.currentData() or "length"
+        self.unit_codes = list(CATEGORIES[self.current_category].unit_codes)
+        source, target = CATEGORIES[self.current_category].defaults
+        self._populate(self.from_combo, source); self._populate(self.to_combo, target); self.clear()
+
     def calculate(self) -> None:
         try:
             value = parse_decimal(self.value_input.text()); source = self.from_combo.currentData(); target = self.to_combo.currentData()
-            result = convert_length(value, source, target)
+            result = convert(value, self.current_category, source, target)
             self.result_value.setText(f"{result.formatted_value} {target}"); self.copy_button.setEnabled(True); self.formula_value.setText(result.formula); self.calculation_value.setText(result.steps[0])
-            factor = LENGTH_FACTORS_IN_METERS[source] / LENGTH_FACTORS_IN_METERS[target]
-            _, _, note = build_length_explanation(value, source, target, factor, self.current_language); self.note_value.setText(note); self.statusBar().showMessage(self.translations["result"])
+            _, _, note = build_explanation(value, self.current_category, source, target, result.value, self.current_language); self.note_value.setText(note); self.statusBar().showMessage(self.translations["result"])
         except ValueError as exc:
             QMessageBox.warning(self, self.translations["app_title"], self.translations.get(str(exc), self.translations["unexpected_error"]))
 
