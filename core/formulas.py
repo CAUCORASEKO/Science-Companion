@@ -51,6 +51,28 @@ FORMULAS = (
             ("Δt", "time_interval", "s"),
         ),
     ),
+    Formula(
+        key="constant_acceleration_velocity",
+        category="motion",
+        expression="v = v₀ + a · t",
+        variables=(
+            ("v", "speed", "m/s"),
+            ("v₀", "initial_speed", "m/s"),
+            ("a", "acceleration", "m/s²"),
+            ("t", "time", "s"),
+        ),
+    ),
+    Formula(
+        key="free_fall",
+        category="motion",
+        expression="v = v₀ + g · t",
+        variables=(
+            ("v", "speed", "m/s"),
+            ("v₀", "initial_speed", "m/s"),
+            ("g", "gravity", "m/s²"),
+            ("t", "time", "s"),
+        ),
+    ),
 
     # Forces
     Formula(
@@ -134,6 +156,38 @@ FORMULAS = (
             ("m", "mass", "kg"),
             ("g", "gravity", "m/s²"),
             ("h", "height", "m"),
+        ),
+    ),
+
+    Formula(
+        key="thermal_energy",
+        category="energy",
+        expression="Q = m · c · ΔT",
+        variables=(
+            ("Q", "thermal_energy", "J"),
+            ("m", "mass", "kg"),
+            ("c", "specific_heat_capacity", "J/(kg·K)"),
+            ("ΔT", "temperature_change", "K"),
+        ),
+    ),
+    Formula(
+        key="efficiency_energy",
+        category="energy",
+        expression="η = E_out / E_in · 100 %",
+        variables=(
+            ("η", "efficiency", "%"),
+            ("E_out", "useful_energy", "J"),
+            ("E_in", "input_energy", "J"),
+        ),
+    ),
+    Formula(
+        key="efficiency_power",
+        category="energy",
+        expression="η = P_out / P_in · 100 %",
+        variables=(
+            ("η", "efficiency", "%"),
+            ("P_out", "useful_power", "W"),
+            ("P_in", "input_power", "W"),
         ),
     ),
 

@@ -22,3 +22,13 @@ def test_conversion_categories(category, value, source, target, expected):
 def test_temperature_rejects_absolute_zero_violation():
     with pytest.raises(ValueError, match="absolute_zero"):
         convert(Decimal("-274"), "temperature", "celsius", "kelvin")
+
+
+def test_energy_joules_to_kilojoules() -> None:
+    result = convert(Decimal("1000"), "energy", "J", "kJ")
+    assert result.value == Decimal("1")
+
+
+def test_energy_megajoules_to_joules() -> None:
+    result = convert(Decimal("0.025"), "energy", "MJ", "J")
+    assert result.value == Decimal("25000")

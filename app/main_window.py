@@ -13,12 +13,14 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QMessageBox,
     QPushButton,
+    QScrollArea,
     QStackedWidget,
     QVBoxLayout,
     QWidget,
 )
 
 from app.formulas_view import FormulasView
+from app.physics_view import PhysicsView
 from app.quantities_view import QuantitiesView
 from app.theme import THEME
 from core.conversion_engine import convert
@@ -131,7 +133,9 @@ class MainWindow(QMainWindow):
 
         self.nav_physics = QPushButton()
         self.nav_physics.setObjectName("navButton")
-        self.nav_physics.setEnabled(False)
+        self.nav_physics.clicked.connect(
+            lambda: self._show_page(3)
+        )
 
         self.nav_chemistry = QPushButton()
         self.nav_chemistry.setObjectName("navButton")
@@ -151,15 +155,26 @@ class MainWindow(QMainWindow):
         body.addWidget(nav)
 
         self.pages = QStackedWidget()
-        body.addWidget(self.pages, 1)
+
+        page_scroll = QScrollArea()
+        page_scroll.setObjectName("pageScroll")
+        page_scroll.setWidgetResizable(True)
+        page_scroll.setFrameShape(QFrame.NoFrame)
+        page_scroll.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarAlwaysOff
+        )
+        page_scroll.setWidget(self.pages)
+        body.addWidget(page_scroll, 1)
 
         self.conversion_page = self._build_conversion_page()
         self.quantities_page = QuantitiesView()
         self.formulas_page = FormulasView()
+        self.physics_page = PhysicsView()
 
         self.pages.addWidget(self.conversion_page)
         self.pages.addWidget(self.quantities_page)
         self.pages.addWidget(self.formulas_page)
+        self.pages.addWidget(self.physics_page)
 
         outer.addLayout(body, 1)
 
@@ -210,9 +225,10 @@ class MainWindow(QMainWindow):
         controls = self._card()
 
         grid = QGridLayout(controls)
-        grid.setContentsMargins(20, 18, 20, 18)
-        grid.setHorizontalSpacing(12)
-        grid.setVerticalSpacing(10)
+        grid.setContentsMargins(18, 16, 18, 18)
+        grid.setHorizontalSpacing(10)
+        grid.setVerticalSpacing(6)
+        controls.setMinimumHeight(280)
 
         self.category_label = QLabel()
         self.category_label.setObjectName("eyebrow")
@@ -222,8 +238,8 @@ class MainWindow(QMainWindow):
             self._on_category_changed
         )
 
-        grid.addWidget(self.category_label, 0, 0)
-        grid.addWidget(self.category_combo, 0, 1, 1, 3)
+        grid.addWidget(self.category_label, 0, 0, 1, 5)
+        grid.addWidget(self.category_combo, 1, 0, 1, 5)
 
         self.value_label = QLabel()
         self.value_label.setObjectName("eyebrow")
@@ -231,8 +247,8 @@ class MainWindow(QMainWindow):
         self.value_input = QLineEdit()
         self.value_input.returnPressed.connect(self.calculate)
 
-        grid.addWidget(self.value_label, 1, 0)
-        grid.addWidget(self.value_input, 1, 1, 1, 3)
+        grid.addWidget(self.value_label, 2, 0, 1, 5)
+        grid.addWidget(self.value_input, 3, 0, 1, 5)
 
         self.from_label = QLabel()
         self.to_label = QLabel()
@@ -246,15 +262,15 @@ class MainWindow(QMainWindow):
         self.swap_button.setObjectName("iconButton")
         self.swap_button.clicked.connect(self.swap_units)
 
-        grid.addWidget(self.from_label, 2, 0)
-        grid.addWidget(self.to_label, 2, 2)
+        grid.addWidget(self.from_label, 4, 0, 1, 2)
+        grid.addWidget(self.to_label, 4, 3, 1, 2)
 
-        grid.addWidget(self.from_combo, 3, 0, 1, 2)
-        grid.addWidget(self.swap_button, 3, 2)
-        grid.addWidget(self.to_combo, 3, 3)
+        grid.addWidget(self.from_combo, 5, 0, 1, 2)
+        grid.addWidget(self.swap_button, 5, 2)
+        grid.addWidget(self.to_combo, 5, 3, 1, 2)
 
         actions = QHBoxLayout()
-        actions.setContentsMargins(0, 8, 0, 0)
+        actions.setContentsMargins(0, 12, 0, 0)
 
         self.clear_button = QPushButton()
 
@@ -268,18 +284,27 @@ class MainWindow(QMainWindow):
         actions.addWidget(self.clear_button)
         actions.addWidget(self.calculate_button)
 
-        grid.addLayout(actions, 4, 0, 1, 4)
+        grid.addLayout(actions, 6, 0, 1, 5)
 
-        grid.setColumnStretch(0, 1)
-        grid.setColumnStretch(1, 1)
-        grid.setColumnStretch(3, 1)
+        for column in (0, 1, 3, 4):
+            grid.setColumnStretch(column, 1)
+        grid.setColumnMinimumWidth(2, 34)
+
+        # Keep the label/control rhythm stable when the page is resized.
+        # The card can grow, but these rows must never collapse into one
+        # another.
+        for row in (0, 2, 4):
+            grid.setRowMinimumHeight(row, 18)
+        for row in (1, 3, 5):
+            grid.setRowMinimumHeight(row, 38)
+        grid.setRowMinimumHeight(6, 46)
 
         content.addWidget(controls)
 
         result = self._card()
 
         result_layout = QVBoxLayout(result)
-        result_layout.setContentsMargins(20, 16, 20, 16)
+        result_layout.setContentsMargins(18, 12, 18, 12)
 
         result_header = QHBoxLayout()
 
@@ -309,8 +334,8 @@ class MainWindow(QMainWindow):
         explanation = self._card()
 
         explanation_layout = QVBoxLayout(explanation)
-        explanation_layout.setContentsMargins(20, 16, 20, 16)
-        explanation_layout.setSpacing(8)
+        explanation_layout.setContentsMargins(18, 12, 18, 12)
+        explanation_layout.setSpacing(6)
 
         self.formula_heading = QLabel()
         self.formula_heading.setObjectName("sectionTitle")
@@ -354,6 +379,7 @@ class MainWindow(QMainWindow):
             (self.nav_conversions, index == 0),
             (self.nav_quantities, index == 1),
             (self.nav_formulas, index == 2),
+            (self.nav_physics, index == 3),
         ):
             button.setProperty("active", active)
             button.style().unpolish(button)
@@ -451,6 +477,7 @@ class MainWindow(QMainWindow):
 
         self.quantities_page.set_translations(t)
         self.formulas_page.set_translations(t)
+        self.physics_page.set_translations(t)
 
         if not self.result_value.text():
             self.result_value.setText(t["result_empty"])

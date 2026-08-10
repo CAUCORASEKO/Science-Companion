@@ -7,9 +7,42 @@ def test_locales_have_matching_interface_keys() -> None:
     es = json.loads((locale_dir / "es.json").read_text(encoding="utf-8"))
     fi = json.loads((locale_dir / "fi.json").read_text(encoding="utf-8"))
     assert set(es) == set(fi)
-    required = {"km", "hm", "dam", "m", "dm", "cm", "mm", "um", "nm", "m²", "m³", "L", "kg", "g", "second", "celsius", "mps"}
+    required = {
+        "km",
+        "hm",
+        "dam",
+        "m",
+        "dm",
+        "cm",
+        "mm",
+        "um",
+        "nm",
+        "m²",
+        "m³",
+        "L",
+        "kg",
+        "g",
+        "second",
+        "celsius",
+        "mps",
+        "mJ",
+        "J",
+        "kJ",
+        "MJ",
+        "GJ",
+    }
     assert required <= set(es["units"])
-    assert set(es["categories"]) == {"length", "area", "volume", "capacity", "mass", "time", "temperature", "speed"}
+    assert set(es["categories"]) == {
+        "length",
+        "area",
+        "volume",
+        "capacity",
+        "mass",
+        "time",
+        "temperature",
+        "speed",
+        "energy",
+    }
 
 
 def test_quantity_translations_exist() -> None:
@@ -73,3 +106,29 @@ def test_formula_translations_exist() -> None:
                     variable_key
                     in data["formula_variables"]
                 )
+
+
+def test_physics_calculator_translations_exist() -> None:
+    import json
+    from pathlib import Path
+
+    required = {
+        "physics_title",
+        "physics_intro",
+        "physics_formula",
+        "physics_expression",
+        "physics_solve_for",
+        "physics_process",
+        "physics_enter_value",
+        "physics_formula_names",
+        "physics_variables",
+    }
+
+    for locale in ("es", "fi"):
+        data = json.loads(
+            Path(f"locales/{locale}.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        assert required <= data.keys()

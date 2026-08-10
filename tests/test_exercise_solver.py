@@ -48,3 +48,11 @@ def test_incompatible_units_are_rejected() -> None:
 def test_invalid_exercise_is_rejected() -> None:
     with pytest.raises(ValueError, match="invalid_exercise"):
         solve_conversion_exercise("hola mundo")
+
+
+def test_written_energy_conversion() -> None:
+    solution = solve_conversion_exercise(
+        "0,025 MJ = X J"
+    )
+    assert solution.category == "energy"
+    assert solution.result_value == Decimal("25000")

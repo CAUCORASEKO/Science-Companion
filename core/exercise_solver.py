@@ -99,6 +99,11 @@ UNIT_ALIASES = {
     "µs": "microsecond",
     "us": "microsecond",
 
+    # Energy
+    "j": "J",
+    "kj": "kJ",
+    "gj": "GJ",
+
     # Temperature
     "°c": "celsius",
     "c": "celsius",
@@ -118,7 +123,20 @@ UNIT_ALIASES = {
 
 
 def normalize_unit(text: str) -> str:
-    cleaned = text.strip().lower().replace(" ", "")
+    raw = text.strip().replace(" ", "")
+
+    energy_units = {
+        "mJ": "mJ",
+        "J": "J",
+        "kJ": "kJ",
+        "MJ": "MJ",
+        "GJ": "GJ",
+    }
+
+    if raw in energy_units:
+        return energy_units[raw]
+
+    cleaned = raw.lower()
 
     if cleaned not in UNIT_ALIASES:
         raise ValueError("unknown_unit")

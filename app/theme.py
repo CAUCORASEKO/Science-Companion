@@ -86,13 +86,13 @@ QComboBox {
     background: #ffffff;
     border: 1px solid #cfd6e4;
     border-radius: 8px;
-    padding: 9px 10px;
-    min-height: 20px;
+    padding: 7px 10px;
+    min-height: 22px;
 }
 
 QLineEdit:focus,
 QComboBox:focus {
-    border: 2px solid #4c6fff;
+    border: 1px solid #4c6fff;
 }
 
 QComboBox QAbstractItemView {
@@ -106,7 +106,8 @@ QPushButton {
     background: #ffffff;
     border: 1px solid #cfd6e4;
     border-radius: 8px;
-    padding: 9px 16px;
+    padding: 7px 16px;
+    min-height: 30px;
     font-weight: 600;
 }
 
@@ -125,17 +126,17 @@ QPushButton#primaryButton:hover {
 }
 
 QPushButton#iconButton {
-    font-size: 18px;
-    padding: 2px;
-    min-width: 32px;
-    max-width: 32px;
-    min-height: 32px;
-    max-height: 32px;
+    font-size: 16px;
+    padding: 0;
+    min-width: 28px;
+    max-width: 28px;
+    min-height: 28px;
+    max-height: 28px;
 }
 
 QLabel#resultValue {
     color: #243b80;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
 }
 
@@ -185,6 +186,10 @@ QScrollArea {
 }
 
 QScrollArea > QWidget > QWidget {
+    background: transparent;
+}
+
+QScrollArea#pageScroll {
     background: transparent;
 }
 

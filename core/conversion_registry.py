@@ -30,6 +30,18 @@ CATEGORIES = {
     "temperature": CategoryDefinition("temperature", ("celsius", "fahrenheit", "kelvin"), {}, ("celsius", "fahrenheit"), "temperature"),
     "speed": CategoryDefinition("speed", ("mps", "kmh", "mph", "fts", "knot"), {
         "mps": Decimal("1"), "kmh": Decimal("0.2777777777777777777777777778"), "mph": Decimal("0.44704"), "fts": Decimal("0.3048"), "knot": Decimal("0.514444")}, ("kmh", "mps")),
+    "energy": CategoryDefinition(
+        "energy",
+        ("mJ", "J", "kJ", "MJ", "GJ"),
+        {
+            "mJ": Decimal("0.001"),
+            "J": Decimal("1"),
+            "kJ": Decimal("1000"),
+            "MJ": Decimal("1000000"),
+            "GJ": Decimal("1000000000"),
+        },
+        ("J", "kJ"),
+    ),
 }
 
 
