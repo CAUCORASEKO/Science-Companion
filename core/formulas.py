@@ -254,4 +254,7 @@ FORMULAS = (
             ("I", "electric_current", "A"),
         ),
     ),
+    Formula(key="wave_speed", category="waves", expression="v = f · λ", variables=(("v", "speed", "m/s"), ("f", "frequency", "Hz"), ("λ", "wavelength", "m"))),
+    Formula(key="frequency_period", category="waves", expression="f = 1 / T", variables=(("f", "frequency", "Hz"), ("T", "time", "s"))),
+    Formula(key="echo_distance", category="waves", expression="d_echo = v · t / 2", variables=(("d", "distance", "m"), ("v", "speed", "m/s"), ("t", "time", "s"))),
 )

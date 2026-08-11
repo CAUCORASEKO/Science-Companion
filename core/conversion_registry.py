@@ -28,8 +28,10 @@ CATEGORIES = {
     "time": CategoryDefinition("time", ("day", "hour", "minute", "second", "millisecond", "microsecond"), {
         "day": Decimal("86400"), "hour": Decimal("3600"), "minute": Decimal("60"), "second": Decimal("1"), "millisecond": Decimal("0.001"), "microsecond": Decimal("0.000001")}, ("hour", "minute")),
     "temperature": CategoryDefinition("temperature", ("celsius", "fahrenheit", "kelvin"), {}, ("celsius", "fahrenheit"), "temperature"),
-    "speed": CategoryDefinition("speed", ("mps", "kmh", "mph", "fts", "knot"), {
-        "mps": Decimal("1"), "kmh": Decimal("0.2777777777777777777777777778"), "mph": Decimal("0.44704"), "fts": Decimal("0.3048"), "knot": Decimal("0.514444")}, ("kmh", "mps")),
+    "speed": CategoryDefinition("speed", ("mps", "kms", "kmh", "mph", "fts", "knot"), {
+        "mps": Decimal("1"), "kms": Decimal("1000"), "kmh": Decimal("0.2777777777777777777777777778"), "mph": Decimal("0.44704"), "fts": Decimal("0.3048"), "knot": Decimal("0.514444")}, ("kmh", "mps")),
+    "frequency": CategoryDefinition("frequency", ("Hz", "kHz", "MHz"), {
+        "Hz": Decimal("1"), "kHz": Decimal("1000"), "MHz": Decimal("1000000")}, ("Hz", "kHz")),
     "energy": CategoryDefinition(
         "energy",
         ("mJ", "J", "kJ", "MJ", "GJ"),

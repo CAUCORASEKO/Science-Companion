@@ -43,6 +43,10 @@ FORMULA_ORDER = (
     "pressure",
     "electric_power",
     "ohm",
+    "wave_speed",
+    "frequency_period",
+    "sound_distance",
+    "echo_distance",
 )
 
 
@@ -201,8 +205,12 @@ class PhysicsView(QWidget):
         self.formula_combo.clear()
 
         for key in FORMULA_ORDER:
+            name = translations["physics_formula_names"].get(
+                key,
+                translations.get("physics_formula_names_extra", {}).get(key, key),
+            )
             self.formula_combo.addItem(
-                translations["physics_formula_names"][key],
+                name,
                 key,
             )
 
@@ -229,7 +237,7 @@ class PhysicsView(QWidget):
 
             label = self.translations["physics_variables"].get(
                 variable,
-                variable,
+                self.translations.get("physics_variables_extra", {}).get(variable, variable),
             )
 
             unit = RESULT_UNITS[
@@ -284,7 +292,7 @@ class PhysicsView(QWidget):
 
             name = self.translations["physics_variables"].get(
                 variable,
-                variable,
+                self.translations.get("physics_variables_extra", {}).get(variable, variable),
             )
 
             unit = RESULT_UNITS[

@@ -105,6 +105,17 @@ RESULT_UNITS = {
     ("ohm", "U"): "V",
     ("ohm", "R"): "Ω",
     ("ohm", "I"): "A",
+    ("wave_speed", "v"): "m/s",
+    ("wave_speed", "f"): "Hz",
+    ("wave_speed", "lambda"): "m",
+    ("frequency_period", "f"): "Hz",
+    ("frequency_period", "T"): "s",
+    ("sound_distance", "s"): "m",
+    ("sound_distance", "v"): "m/s",
+    ("sound_distance", "t"): "s",
+    ("echo_distance", "d"): "m",
+    ("echo_distance", "v"): "m/s",
+    ("echo_distance", "t"): "s",
 }
 
 
@@ -126,6 +137,10 @@ FORMULA_LABELS = {
     "pressure": "p = F / A",
     "electric_power": "P = U · I",
     "ohm": "U = R · I",
+    "wave_speed": "v = f · λ",
+    "frequency_period": "f = 1 / T",
+    "sound_distance": "s = v · t",
+    "echo_distance": "d = v · t / 2",
 }
 
 
@@ -147,6 +162,10 @@ VARIABLES = {
     "pressure": ("p", "F", "A"),
     "electric_power": ("P", "U", "I"),
     "ohm": ("U", "R", "I"),
+    "wave_speed": ("v", "f", "lambda"),
+    "frequency_period": ("f", "T"),
+    "sound_distance": ("s", "v", "t"),
+    "echo_distance": ("d", "v", "t"),
 }
 
 
@@ -164,6 +183,7 @@ DISPLAY_SYMBOLS = {
     "Ein": "E_in",
     "Pout": "P_out",
     "Pin": "P_in",
+    "lambda": "λ",
 }
 
 
@@ -252,6 +272,15 @@ def solve_physics(
 
         elif formula_key == "ohm":
             result = _solve_ohm(solve_for, values)
+
+        elif formula_key == "wave_speed":
+            result = _solve_wave_speed(solve_for, values)
+        elif formula_key == "frequency_period":
+            result = _solve_frequency_period(solve_for, values)
+        elif formula_key == "sound_distance":
+            result = _solve_motion(solve_for, values)
+        elif formula_key == "echo_distance":
+            result = _solve_echo_distance(solve_for, values)
 
         else:
             raise ValueError("unknown_formula")
@@ -562,6 +591,34 @@ def _solve_ohm(
     return v["U"] / v["R"]
 
 
+def _solve_wave_speed(solve_for: str, v: dict[str, Decimal]) -> Decimal:
+    if solve_for == "v":
+        return v["f"] * v["lambda"]
+    if solve_for == "f":
+        _require_nonzero(v["lambda"], "lambda")
+        return v["v"] / v["lambda"]
+    _require_nonzero(v["f"], "f")
+    return v["v"] / v["f"]
+
+
+def _solve_frequency_period(solve_for: str, v: dict[str, Decimal]) -> Decimal:
+    if solve_for == "f":
+        _require_nonzero(v["T"], "T")
+        return Decimal("1") / v["T"]
+    _require_nonzero(v["f"], "f")
+    return Decimal("1") / v["f"]
+
+
+def _solve_echo_distance(solve_for: str, v: dict[str, Decimal]) -> Decimal:
+    if solve_for == "d":
+        return v["v"] * v["t"] / Decimal("2")
+    if solve_for == "v":
+        _require_nonzero(v["t"], "t")
+        return Decimal("2") * v["d"] / v["t"]
+    _require_nonzero(v["v"], "v")
+    return Decimal("2") * v["d"] / v["v"]
+
+
 def _build_substitution(
     formula_key: str,
     solve_for: str,
@@ -744,5 +801,31 @@ def _build_substitution(
         if solve_for == "R":
             return f"R = {formatted_values['U']} / {formatted_values['I']}"
         return f"I = {formatted_values['U']} / {formatted_values['R']}"
+
+    if formula_key == "wave_speed":
+        if solve_for == "v":
+            return f"v = {formatted_values['f']} · {formatted_values['lambda']}"
+        if solve_for == "f":
+            return f"f = {formatted_values['v']} / {formatted_values['lambda']}"
+        return f"λ = {formatted_values['v']} / {formatted_values['f']}"
+
+    if formula_key == "frequency_period":
+        if solve_for == "f":
+            return f"f = 1 / {formatted_values['T']}"
+        return f"T = 1 / {formatted_values['f']}"
+
+    if formula_key == "sound_distance":
+        if solve_for == "s":
+            return f"s = {formatted_values['v']} · {formatted_values['t']}"
+        if solve_for == "v":
+            return f"v = {formatted_values['s']} / {formatted_values['t']}"
+        return f"t = {formatted_values['s']} / {formatted_values['v']}"
+
+    if formula_key == "echo_distance":
+        if solve_for == "d":
+            return f"d = {formatted_values['v']} · {formatted_values['t']} / 2"
+        if solve_for == "v":
+            return f"v = 2 · {formatted_values['d']} / {formatted_values['t']}"
+        return f"t = 2 · {formatted_values['d']} / {formatted_values['v']}"
 
     raise ValueError(f"unknown_formula:{s}")

@@ -16,7 +16,8 @@
     "time": "Tiempo",
     "temperature": "Temperatura",
     "speed": "Velocidad",
-    "energy": "Energía"
+    "energy": "Energía",
+    "frequency": "Frecuencia"
   },
   "length": "Longitud",
   "value": "Valor",
@@ -95,6 +96,10 @@
     "mph": "Millas por hora (mph)",
     "fts": "Pie por segundo (ft/s)",
     "knot": "Nudo (kn)",
+    "kms": "Kilómetro por segundo (km/s)",
+    "Hz": "Hercio (Hz)",
+    "kHz": "Kilohercio (kHz)",
+    "MHz": "Megahercio (MHz)",
     "mJ": "Milijulio (mJ)",
     "J": "Julio (J)",
     "kJ": "Kilojulio (kJ)",
@@ -200,7 +205,10 @@
     "resistance": "Resistencia",
     "thermal_energy": "Energía térmica",
     "efficiency_energy": "Eficiencia por energía",
-    "efficiency_power": "Eficiencia por potencia"
+    "efficiency_power": "Eficiencia por potencia",
+    "wave_speed": "Ondas: velocidad, frecuencia y longitud de onda",
+    "frequency_period": "Frecuencia y período",
+    "echo_distance": "Eco / sonar: distancia"
   },
   "formula_variables": {
     "speed": "velocidad",
@@ -233,7 +241,9 @@
     "useful_energy": "energía útil",
     "input_energy": "energía de entrada",
     "useful_power": "potencia útil",
-    "input_power": "potencia de entrada"
+    "input_power": "potencia de entrada",
+    "frequency": "frecuencia",
+    "wavelength": "longitud de onda"
   },
   "physics_title": "Calculadora de Física",
   "physics_intro": "Selecciona una relación física, elige la incógnita e introduce los valores conocidos.",
@@ -297,6 +307,36 @@
     "Ein": "Energía de entrada",
     "Pout": "Potencia útil",
     "Pin": "Potencia de entrada"
+  },
+  "formula_categories_extra": {
+    "waves": "Ondas, sonido y luz"
+  },
+  "formula_names_extra": {
+    "wave_speed": "Ondas: velocidad, frecuencia y longitud de onda",
+    "frequency_period": "Frecuencia y período",
+    "echo_distance": "Eco / sonar: distancia"
+  },
+  "physics_formula_names_extra": {
+    "wave_speed": "Ondas: velocidad, frecuencia y longitud de onda",
+    "frequency_period": "Frecuencia y período",
+    "sound_distance": "Sonido: distancia directa",
+    "echo_distance": "Eco / sonar: distancia"
+  },
+  "physics_variables_extra": {
+    "f": "Frecuencia",
+    "lambda": "Longitud de onda",
+    "T": "Período",
+    "d": "Distancia"
+  },
+  "wave_reference": {
+    "title": "Ondas, sonido, luz y radiación",
+    "sections": [
+      {"title": "Sonido", "text": "Aire ≈ 340 m/s; agua ≈ 1500 m/s. Eco/sonar: d = v · t / 2. Relámpago: 19 s ≈ 6,46 km."},
+      {"title": "Reflexión y amplitud", "text": "Extremo fijo: pulso invertido. Extremo libre: pulso no invertido. Sin extremo: no hay reflexión. La amplitud es el desplazamiento máximo respecto al equilibrio; una amplitud mayor hace la onda más alta, pero no cambia por sí sola la frecuencia."},
+      {"title": "Luz", "text": "La luz viaja aproximadamente en línea recta en un medio uniforme. Una sombra se forma al bloquear la luz. Reflexión, refracción, materiales transparentes; las superficies oscuras absorben más luz. La luz blanca contiene muchos colores. Un objeto rojo refleja principalmente luz roja. Velocidad: 299792458 m/s (≈ 300000 km/s)."},
+      {"title": "Radiación", "text": "Radiación ionizante: alfa, beta, gamma y rayos X. La radiación ultravioleta depende de la energía: la UV de alta energía puede ionizar. Radio y microondas son no ionizantes."},
+      {"title": "Seguridad UV", "text": "Riesgo para piel y ojos y mayor riesgo de cáncer de piel. Usa protector solar, ropa protectora, sombrero, gafas de sol y sombra; evita el sol más intenso del mediodía."}
+    ]
   },
   "energy_reference": {
     "title": "Energía",

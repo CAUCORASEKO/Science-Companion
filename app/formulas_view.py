@@ -17,6 +17,7 @@ CATEGORY_ORDER = (
     "energy",
     "matter",
     "electricity",
+    "waves",
 )
 
 
@@ -98,6 +99,32 @@ class FormulasView(QWidget):
                     )
                 )
 
+        reference = self.translations.get("wave_reference")
+        if reference:
+            card = QFrame()
+            card.setObjectName("card")
+            layout = QVBoxLayout(card)
+            layout.setContentsMargins(18, 16, 18, 18)
+            heading = QLabel(reference["title"])
+            heading.setObjectName("sectionHeading")
+            layout.addWidget(heading)
+            layout.setSpacing(10)
+            for section in reference["sections"]:
+                section_card = QFrame()
+                section_card.setObjectName("referenceSection")
+                section_layout = QVBoxLayout(section_card)
+                section_layout.setContentsMargins(12, 10, 12, 10)
+                section_layout.setSpacing(4)
+                section_heading = QLabel(section["title"])
+                section_heading.setObjectName("referenceHeading")
+                body = QLabel(section["text"])
+                body.setWordWrap(True)
+                body.setObjectName("formulaDetails")
+                section_layout.addWidget(section_heading)
+                section_layout.addWidget(body)
+                layout.addWidget(section_card)
+            self.content_layout.addWidget(card)
+
         self.content_layout.addStretch()
 
     def _build_category(
@@ -113,9 +140,10 @@ class FormulasView(QWidget):
         layout.setSpacing(10)
 
         heading = QLabel(
-            self.translations[
-                "formula_categories"
-            ][category]
+            self.translations["formula_categories"].get(
+                category,
+                self.translations.get("formula_categories_extra", {}).get(category, category),
+            )
         )
         heading.setObjectName("sectionHeading")
 
@@ -140,9 +168,10 @@ class FormulasView(QWidget):
         top.setHorizontalSpacing(14)
 
         name = QLabel(
-            self.translations["formula_names"][
-                formula.key
-            ]
+            self.translations["formula_names"].get(
+                formula.key,
+                self.translations.get("formula_names_extra", {}).get(formula.key, formula.key),
+            )
         )
         name.setObjectName("formulaName")
 

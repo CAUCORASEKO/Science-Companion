@@ -42,6 +42,7 @@ def test_locales_have_matching_interface_keys() -> None:
         "temperature",
         "speed",
         "energy",
+        "frequency",
     }
 
 

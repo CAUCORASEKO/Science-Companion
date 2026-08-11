@@ -16,7 +16,8 @@
     "time": "Aika",
     "temperature": "Lämpötila",
     "speed": "Nopeus",
-    "energy": "Energia"
+    "energy": "Energia",
+    "frequency": "Taajuus"
   },
   "length": "Pituus",
   "value": "Arvo",
@@ -95,6 +96,10 @@
     "mph": "Mailia tunnissa (mph)",
     "fts": "Jalkaa sekunnissa (ft/s)",
     "knot": "Solmu (kn)",
+    "kms": "Kilometriä sekunnissa (km/s)",
+    "Hz": "Hertsi (Hz)",
+    "kHz": "Kilohertsi (kHz)",
+    "MHz": "Megahertsi (MHz)",
     "mJ": "Millijoule (mJ)",
     "J": "Joule (J)",
     "kJ": "Kilojoule (kJ)",
@@ -200,7 +205,10 @@
     "resistance": "Resistanssi",
     "thermal_energy": "Lämpöenergia",
     "efficiency_energy": "Hyötysuhde energiasta",
-    "efficiency_power": "Hyötysuhde tehosta"
+    "efficiency_power": "Hyötysuhde tehosta",
+    "wave_speed": "Aaltoliike: nopeus, taajuus ja aallonpituus",
+    "frequency_period": "Taajuus ja jaksonaika",
+    "echo_distance": "Kaiku / kaikuluotain: etäisyys"
   },
   "formula_variables": {
     "speed": "nopeus",
@@ -233,7 +241,9 @@
     "useful_energy": "hyödyllinen energia",
     "input_energy": "otettu energia",
     "useful_power": "hyödyllinen teho",
-    "input_power": "ottoteho"
+    "input_power": "ottoteho",
+    "frequency": "taajuus",
+    "wavelength": "aallonpituus"
   },
   "physics_title": "Fysiikan laskin",
   "physics_intro": "Valitse fysiikan suureyhtälö, ratkaistava suure ja syötä tunnetut arvot.",
@@ -297,6 +307,36 @@
     "Ein": "Otettu energia",
     "Pout": "Hyödyllinen teho",
     "Pin": "Ottoteho"
+  },
+  "formula_categories_extra": {
+    "waves": "Aallot, ääni ja valo"
+  },
+  "formula_names_extra": {
+    "wave_speed": "Aaltoliike: nopeus, taajuus ja aallonpituus",
+    "frequency_period": "Taajuus ja jaksonaika",
+    "echo_distance": "Kaiku / kaikuluotain: etäisyys"
+  },
+  "physics_formula_names_extra": {
+    "wave_speed": "Aaltoliike: nopeus, taajuus ja aallonpituus",
+    "frequency_period": "Taajuus ja jaksonaika",
+    "sound_distance": "Ääni: suora etäisyys",
+    "echo_distance": "Kaiku / kaikuluotain: etäisyys"
+  },
+  "physics_variables_extra": {
+    "f": "Taajuus",
+    "lambda": "Aallonpituus",
+    "T": "Jaksonaika",
+    "d": "Etäisyys"
+  },
+  "wave_reference": {
+    "title": "Aallot, ääni, valo ja säteily",
+    "sections": [
+      {"title": "Ääni", "text": "Ilma ≈ 340 m/s; vesi ≈ 1500 m/s. Kaiku/kaikuluotain: d = v · t / 2. Salama: 19 s ≈ 6,46 km."},
+      {"title": "Heijastuminen ja amplitudi", "text": "Kiinteä pää: pulssi heijastuu vastakkaismerkkisenä. Vapaa pää: pulssi heijastuu samanmerkkisenä. Ei päätä: ei heijastusta. Amplitudi on suurin siirtymä tasapainoasemasta; suurempi amplitudi tekee aallosta korkeamman, mutta ei yksin muuta taajuutta."},
+      {"title": "Valo", "text": "Valo kulkee likimain suoraviivaisesti homogeenisessa väliaineessa. Varjo syntyy, kun kappale estää valon. Heijastuminen, taittuminen ja läpinäkyvät materiaalit; tummat pinnat absorboivat enemmän valoa. Valkoinen valo sisältää monia värejä. Punainen kappale heijastaa pääasiassa punaista valoa. Nopeus: 299792458 m/s (≈ 300000 km/s)."},
+      {"title": "Säteily", "text": "Ionisoiva säteily: alfa, beeta, gamma ja röntgensäteily. Ultraviolettisäteily riippuu energiasta: suurienerginen UV voi olla ionisoivaa. Radioaallot ja mikroaallot ovat ionisoimattomia."},
+      {"title": "UV-turvallisuus", "text": "Iho- ja silmävaurioiden sekä ihosyövän riski kasvaa. Käytä aurinkovoidetta, suojaavaa vaatetusta, hattua ja aurinkolaseja, hakeudu varjoon ja vältä voimakkainta keskipäivän aurinkoa."}
+    ]
   },
   "energy_reference": {
     "title": "Energia",

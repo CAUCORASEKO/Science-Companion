@@ -6,13 +6,15 @@ from core.conversion_engine import convert
 # Only unit names and categories live here. Conversion factors remain in the
 # shared conversion registry used by the conversion page.
 INPUT_UNITS: dict[str, tuple[str, ...]] = {
-    "speed": ("mps", "kmh"),
+    "speed": ("mps", "kms", "kmh"),
     "distance": ("m", "km", "cm", "mm"),
     "time": ("second", "minute", "hour"),
     "mass": ("kg", "g"),
     "area": ("m²", "cm²"),
     "volume": ("m³", "dm³", "L"),
     "energy": ("J", "kJ", "MJ"),
+    "frequency": ("Hz", "kHz", "MHz"),
+    "wavelength": ("m", "cm", "mm"),
 }
 
 _VARIABLE_DIMENSIONS = {
@@ -22,6 +24,9 @@ _VARIABLE_DIMENSIONS = {
     "s": "distance",
     "t": "time",
     "dt": "time",
+    "T": "time",
+    "f": "frequency",
+    "lambda": "wavelength",
     "m": "mass",
     "A": "area",
     "V": "volume",
@@ -31,6 +36,7 @@ _VARIABLE_DIMENSIONS = {
     "Q": "energy",
     "Eout": "energy",
     "Ein": "energy",
+    "d": "distance",
 }
 
 
@@ -59,6 +65,10 @@ def to_si(value: Decimal, variable: str, unit: str) -> Decimal:
         return convert(value, "area", unit, "m²").value
     if dimension == "energy":
         return convert(value, "energy", unit, "J").value
+    if dimension == "frequency":
+        return convert(value, "frequency", unit, "Hz").value
+    if dimension == "wavelength":
+        return convert(value, "length", unit, "m").value
     if unit == "L":
         litres = convert(value, "capacity", "L", "L").value
         return convert(litres, "volume", "dm³", "m³").value

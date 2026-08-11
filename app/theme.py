@@ -222,6 +222,18 @@ QLabel#formulaDetails {
     font-size: 12px;
 }
 
+QFrame#referenceSection {
+    background: #f8f9fc;
+    border: 1px solid #edf0f6;
+    border-radius: 10px;
+}
+
+QLabel#referenceHeading {
+    color: #344054;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 QStatusBar {
     color: #667085;
 }
