@@ -4,7 +4,43 @@
   "navigation": "Selaa",
   "conversions": "Muunnokset",
   "physics": "Fysiikka",
-  "chemistry": "Kemia · tulossa",
+  "chemistry": {
+    "title": "Kemia",
+    "intro": "Aine ja niiden ominaisuudet",
+    "topic_title": "Aine ja niiden ominaisuudet",
+    "topic_text": "Puhtaalla aineella on vakioinen koostumus ja sille ominaisia piirteitä. Seos sisältää vähintään kahta ainetta, ja sen koostumus voi vaihdella.",
+    "mixtures_title": "Puhtaat aineet ja seokset",
+    "mixtures_text": "Puhdas aine: happi, vety, vesi, sokeri/fruktoosi, kulta ja kupari. Homogeeninen seos: ilma, pronssi, sokerivesi ja merivesi; ainesosia ei erota paljaalla silmällä. Heterogeeninen seos: savu, appelsiini ja pizza; osat tai faasit voidaan erottaa. Maito on kolloidinen seos: luokittelu riippuu tarkastelutasosta.",
+    "explorer_title": "Alkuaineiden tutkija",
+    "explorer_hint": "Hae symbolilla tai espanjan- tai suomenkielisellä nimellä.",
+    "periodic_title": "Jaksollinen järjestelmä: jaksot ja ryhmät",
+    "periodic_text": "Jakso on vaakasuora rivi. Koulumallissa se liittyy miehitettyihin elektronikuoriin eli pääenergiatasoihin. Ryhmä on pystysuora sarake. Pääryhmien saman ryhmän alkuaineilla on usein samankaltaiset ulkoelektronien rakenteet ja kemiallinen käyttäytyminen; ryhmän numero ei kuitenkaan yleispätevästi kerro kaikkien alkuaineiden valenssielektronien määrää.",
+    "families_title": "Tärkeitä alkuaineryhmiä",
+    "families_text": "Alkalimetallit: ryhmä 1, vetyä lukuun ottamatta tavanomaisessa luokituksessa; reaktiivisia metalleja, jotka muodostavat yleensä +1-ioneja. Maa-alkalimetallit: ryhmä 2; muodostavat yleensä +2-ioneja. Halogeenit: ryhmä 17, reaktiivisia epämetalleja, jotka ottavat yleensä yhden elektronin ja muodostavat −1-ioneja. Jalokaasut: ryhmä 18, yleensä vähän reaktiivisia ja ulkoelektronirakenteeltaan vakaita.",
+    "classification_title": "Metallit, puolimetallit ja epämetallit",
+    "classification_text": "Metallit johtavat yleensä hyvin sähköä ja lämpöä, ovat muokattavia ja muodostavat positiivisia ioneja, mutta poikkeuksia on. Epämetallit johtavat alkuaineina usein huonosti; kiinteät epämetallit ovat usein hauraita ja voivat muodostaa negatiivisia ioneja tai kovalenttisia sidoksia. Puolimetalleilla on välimuotoisia tai sekoittuneita ominaisuuksia, ja puolijohdekäyttäytyminen on tavallista.",
+    "element_labels": {
+      "symbol": "Symboli",
+      "atomic_number": "Atomiluku",
+      "period": "Jakso",
+      "group": "Ryhmä",
+      "classification": "Luokitus",
+      "family": "Ryhmäperhe",
+      "valence": "Valenssielektronit",
+      "common_ion": "Tavallinen ioni"
+    },
+    "classifications": {
+      "metal": "Metalli",
+      "metalloid": "Puolimetalli",
+      "nonmetal": "Epämetalli"
+    },
+    "families": {
+      "alkali_metal": "Alkalimetalli",
+      "alkaline_earth": "Maa-alkalimetalli",
+      "halogen": "Halogeeni",
+      "noble_gas": "Jalokaasu"
+    }
+  },
   "language": "Kieli",
   "category": "Luokka",
   "categories": {
@@ -339,19 +375,43 @@
   "electricity_reference": {
     "title": "Sähköoppi – suureet, komponentit ja turvallisuus",
     "sections": [
-      {"title": "Sähkösuureet", "text": "sähkövirta — I — ampeeri (A)\njännite — U — voltti (V)\nresistanssi — R — ohmi (Ω)\nteho — P — watti (W)"},
-      {"title": "Piirikomponentit ja symbolit", "text": "virtamittari (ampeerimittari) — mittaa sähkövirtaa\njännitemittari — mittaa jännitettä\nkatkaisija / kytkin — avaa tai sulkee piirin\nsuojamaadoitus — turvallisuutta parantava maadoitusjohdin\nkäämi, muuntaja, lamppu, vastus, sähköjohto / johdin, sulake\nsuojaeristys, paristo / jännitelähde\nGraafiset IEC-standardin mukaiset symbolit ovat tuleva käyttöliittymäparannus."},
-      {"title": "Sähköturvallisuus", "text": "Ihmiskeho voi johtaa sähköä. Vesi, erityisesti liuenneita ioneja sisältävä tavallinen vesi, voi johtaa sähköä ja lisätä vaaraa. Kehon läpi kulkeva virta voi häiritä sydäntä, lihaksia, hermoja ja hengitystä. Vaurioituneet sähkölaitteet ja huolimaton käsittely ovat vaarallisia. Suojamaadoitus tarjoaa asianmukaisissa sähköjärjestelmissä pieniresistanssisen vikavirtareitin. Sähkökaaret voivat olla erittäin kuumia ja aiheuttaa vakavia palovammoja tai tulipalon. Virta kulkee käytettävissä olevia johtavia reittejä pitkin jännite-erojen ja impedanssin mukaan — sähkö ei aina kulje kohti maata. Yleinen hätänumero Suomessa ja EU:ssa on 112."}
+      {
+        "title": "Sähkösuureet",
+        "text": "sähkövirta — I — ampeeri (A)\njännite — U — voltti (V)\nresistanssi — R — ohmi (Ω)\nteho — P — watti (W)"
+      },
+      {
+        "title": "Piirikomponentit ja symbolit",
+        "text": "virtamittari (ampeerimittari) — mittaa sähkövirtaa\njännitemittari — mittaa jännitettä\nkatkaisija / kytkin — avaa tai sulkee piirin\nsuojamaadoitus — turvallisuutta parantava maadoitusjohdin\nkäämi, muuntaja, lamppu, vastus, sähköjohto / johdin, sulake\nsuojaeristys, paristo / jännitelähde\nGraafiset IEC-standardin mukaiset symbolit ovat tuleva käyttöliittymäparannus."
+      },
+      {
+        "title": "Sähköturvallisuus",
+        "text": "Ihmiskeho voi johtaa sähköä. Vesi, erityisesti liuenneita ioneja sisältävä tavallinen vesi, voi johtaa sähköä ja lisätä vaaraa. Kehon läpi kulkeva virta voi häiritä sydäntä, lihaksia, hermoja ja hengitystä. Vaurioituneet sähkölaitteet ja huolimaton käsittely ovat vaarallisia. Suojamaadoitus tarjoaa asianmukaisissa sähköjärjestelmissä pieniresistanssisen vikavirtareitin. Sähkökaaret voivat olla erittäin kuumia ja aiheuttaa vakavia palovammoja tai tulipalon. Virta kulkee käytettävissä olevia johtavia reittejä pitkin jännite-erojen ja impedanssin mukaan — sähkö ei aina kulje kohti maata. Yleinen hätänumero Suomessa ja EU:ssa on 112."
+      }
     ]
   },
   "wave_reference": {
     "title": "Aallot, ääni, valo ja säteily",
     "sections": [
-      {"title": "Ääni", "text": "Ilma ≈ 340 m/s; vesi ≈ 1500 m/s. Kaiku/kaikuluotain: d = v · t / 2. Salama: 19 s ≈ 6,46 km."},
-      {"title": "Heijastuminen ja amplitudi", "text": "Kiinteä pää: pulssi heijastuu vastakkaismerkkisenä. Vapaa pää: pulssi heijastuu samanmerkkisenä. Ei päätä: ei heijastusta. Amplitudi on suurin siirtymä tasapainoasemasta; suurempi amplitudi tekee aallosta korkeamman, mutta ei yksin muuta taajuutta."},
-      {"title": "Valo", "text": "Valo kulkee likimain suoraviivaisesti homogeenisessa väliaineessa. Varjo syntyy, kun kappale estää valon. Heijastuminen, taittuminen ja läpinäkyvät materiaalit; tummat pinnat absorboivat enemmän valoa. Valkoinen valo sisältää monia värejä. Punainen kappale heijastaa pääasiassa punaista valoa. Nopeus: 299792458 m/s (≈ 300000 km/s)."},
-      {"title": "Säteily", "text": "Ionisoiva säteily: alfa, beeta, gamma ja röntgensäteily. Ultraviolettisäteily riippuu energiasta: suurienerginen UV voi olla ionisoivaa. Radioaallot ja mikroaallot ovat ionisoimattomia."},
-      {"title": "UV-turvallisuus", "text": "Iho- ja silmävaurioiden sekä ihosyövän riski kasvaa. Käytä aurinkovoidetta, suojaavaa vaatetusta, hattua ja aurinkolaseja, hakeudu varjoon ja vältä voimakkainta keskipäivän aurinkoa."}
+      {
+        "title": "Ääni",
+        "text": "Ilma ≈ 340 m/s; vesi ≈ 1500 m/s. Kaiku/kaikuluotain: d = v · t / 2. Salama: 19 s ≈ 6,46 km."
+      },
+      {
+        "title": "Heijastuminen ja amplitudi",
+        "text": "Kiinteä pää: pulssi heijastuu vastakkaismerkkisenä. Vapaa pää: pulssi heijastuu samanmerkkisenä. Ei päätä: ei heijastusta. Amplitudi on suurin siirtymä tasapainoasemasta; suurempi amplitudi tekee aallosta korkeamman, mutta ei yksin muuta taajuutta."
+      },
+      {
+        "title": "Valo",
+        "text": "Valo kulkee likimain suoraviivaisesti homogeenisessa väliaineessa. Varjo syntyy, kun kappale estää valon. Heijastuminen, taittuminen ja läpinäkyvät materiaalit; tummat pinnat absorboivat enemmän valoa. Valkoinen valo sisältää monia värejä. Punainen kappale heijastaa pääasiassa punaista valoa. Nopeus: 299792458 m/s (≈ 300000 km/s)."
+      },
+      {
+        "title": "Säteily",
+        "text": "Ionisoiva säteily: alfa, beeta, gamma ja röntgensäteily. Ultraviolettisäteily riippuu energiasta: suurienerginen UV voi olla ionisoivaa. Radioaallot ja mikroaallot ovat ionisoimattomia."
+      },
+      {
+        "title": "UV-turvallisuus",
+        "text": "Iho- ja silmävaurioiden sekä ihosyövän riski kasvaa. Käytä aurinkovoidetta, suojaavaa vaatetusta, hattua ja aurinkolaseja, hakeudu varjoon ja vältä voimakkainta keskipäivän aurinkoa."
+      }
     ]
   },
   "energy_reference": {
@@ -363,5 +423,6 @@
     "kinetic": "Liike-energia riippuu kappaleen massasta ja nopeudesta.",
     "potential": "Asemaenergia riippuu massasta, putoamiskiihtyvyydestä ja korkeudesta.",
     "heat_transfer": "Lämpöenergia voi siirtyä johtumalla, kuljettumalla (konvektio) tai säteilemällä."
-  }
+  },
+  "chemistry_nav": "Kemia"
 }

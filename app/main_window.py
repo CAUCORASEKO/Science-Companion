@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.formulas_view import FormulasView
+from app.chemistry_view import ChemistryView
 from app.physics_view import PhysicsView
 from app.quantities_view import QuantitiesView
 from app.theme import THEME
@@ -139,7 +140,7 @@ class MainWindow(QMainWindow):
 
         self.nav_chemistry = QPushButton()
         self.nav_chemistry.setObjectName("navButton")
-        self.nav_chemistry.setEnabled(False)
+        self.nav_chemistry.clicked.connect(lambda: self._show_page(4))
 
         for item in (
             self.nav_title,
@@ -170,11 +171,13 @@ class MainWindow(QMainWindow):
         self.quantities_page = QuantitiesView()
         self.formulas_page = FormulasView()
         self.physics_page = PhysicsView()
+        self.chemistry_page = ChemistryView()
 
         self.pages.addWidget(self.conversion_page)
         self.pages.addWidget(self.quantities_page)
         self.pages.addWidget(self.formulas_page)
         self.pages.addWidget(self.physics_page)
+        self.pages.addWidget(self.chemistry_page)
 
         outer.addLayout(body, 1)
 
@@ -380,6 +383,7 @@ class MainWindow(QMainWindow):
             (self.nav_quantities, index == 1),
             (self.nav_formulas, index == 2),
             (self.nav_physics, index == 3),
+            (self.nav_chemistry, index == 4),
         ):
             button.setProperty("active", active)
             button.style().unpolish(button)
@@ -407,7 +411,7 @@ class MainWindow(QMainWindow):
         self.nav_quantities.setText(t["quantities_nav"])
         self.nav_formulas.setText(t["formulas_nav"])
         self.nav_physics.setText(t["physics"])
-        self.nav_chemistry.setText(t["chemistry"])
+        self.nav_chemistry.setText(t["chemistry_nav"])
 
         self.category_label.setText(t["category"])
         self.value_label.setText(t["value"])
@@ -478,6 +482,7 @@ class MainWindow(QMainWindow):
         self.quantities_page.set_translations(t)
         self.formulas_page.set_translations(t)
         self.physics_page.set_translations(t)
+        self.chemistry_page.set_translations(t)
 
         if not self.result_value.text():
             self.result_value.setText(t["result_empty"])

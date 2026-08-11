@@ -4,7 +4,43 @@
   "navigation": "Explorar",
   "conversions": "Conversiones",
   "physics": "Física",
-  "chemistry": "Química · pronto",
+  "chemistry": {
+    "title": "Química",
+    "intro": "Sustancias y sus propiedades",
+    "topic_title": "Sustancias y sus propiedades",
+    "topic_text": "Una sustancia pura tiene composición constante y propiedades características. Una mezcla contiene dos o más sustancias; su composición puede variar.",
+    "mixtures_title": "Sustancias puras y mezclas",
+    "mixtures_text": "Sustancia pura: oxígeno, hidrógeno, agua, azúcar/fructosa, oro y cobre. Mezcla homogénea: aire, bronce, agua azucarada y agua de mar; sus componentes no se distinguen a simple vista. Mezcla heterogénea: humo, naranja y pizza; sus partes o fases pueden distinguirse. La leche es una mezcla coloidal: la clasificación depende del nivel de observación.",
+    "explorer_title": "Explorador de elementos",
+    "explorer_hint": "Busca por símbolo o por nombre en español o finés.",
+    "periodic_title": "Tabla periódica: períodos y grupos",
+    "periodic_text": "Un período es una fila horizontal y se relaciona, en el modelo escolar simplificado, con las capas electrónicas o niveles principales ocupados. Un grupo es una columna vertical. En los elementos de los grupos principales, un mismo grupo suele implicar patrones parecidos de electrones de valencia y comportamiento químico; el número del grupo no equivale universalmente a los electrones de valencia de todos los elementos.",
+    "families_title": "Familias importantes",
+    "families_text": "Metales alcalinos: grupo 1, excepto el hidrógeno en la clasificación habitual; son metales reactivos y suelen formar iones +1. Metales alcalinotérreos: grupo 2; suelen formar iones +2. Halógenos: grupo 17, no metales reactivos que suelen ganar un electrón y formar iones −1. Gases nobles: grupo 18, generalmente poco reactivos y con configuraciones externas estables.",
+    "classification_title": "Metales, metaloides y no metales",
+    "classification_text": "Los metales suelen conducir bien la electricidad y el calor, ser maleables y formar iones positivos, aunque existen excepciones. Los no metales suelen conducir peor en forma elemental; los sólidos suelen ser frágiles y pueden formar iones negativos o enlaces covalentes. Los metaloides tienen propiedades intermedias o mixtas y es común que presenten comportamiento semiconductor.",
+    "element_labels": {
+      "symbol": "Símbolo",
+      "atomic_number": "Número atómico",
+      "period": "Período",
+      "group": "Grupo",
+      "classification": "Clasificación",
+      "family": "Familia",
+      "valence": "Electrones de valencia",
+      "common_ion": "Ion común"
+    },
+    "classifications": {
+      "metal": "Metal",
+      "metalloid": "Metaloide",
+      "nonmetal": "No metal"
+    },
+    "families": {
+      "alkali_metal": "Metal alcalino",
+      "alkaline_earth": "Metal alcalinotérreo",
+      "halogen": "Halógeno",
+      "noble_gas": "Gas noble"
+    }
+  },
   "language": "Idioma",
   "category": "Categoría",
   "categories": {
@@ -339,19 +375,43 @@
   "electricity_reference": {
     "title": "Electricidad – magnitudes, componentes y seguridad",
     "sections": [
-      {"title": "Magnitudes eléctricas", "text": "corriente eléctrica — I — amperio (A)\ntensión / voltaje — U — voltio (V)\nresistencia — R — ohmio (Ω)\npotencia — P — vatio (W)"},
-      {"title": "Componentes y símbolos del circuito", "text": "amperímetro — mide la corriente eléctrica\nvoltímetro — mide la tensión\ninterruptor — abre o cierra el circuito\ntoma de tierra de protección — conductor de seguridad\nbobina, transformador, lámpara, resistencia, cable / conductor, fusible\ndoble aislamiento, batería / fuente de tensión\nLos símbolos gráficos IEC normalizados quedan como mejora futura de la interfaz."},
-      {"title": "Seguridad eléctrica", "text": "El cuerpo humano puede conducir electricidad. El agua, especialmente el agua corriente con iones disueltos, puede conducir electricidad y aumentar el peligro. La corriente a través del cuerpo puede interferir con el corazón, los músculos, los nervios y la respiración. Los equipos dañados y el manejo descuidado son peligrosos. La puesta a tierra de protección proporciona una ruta de baja resistencia para la corriente de fallo en sistemas adecuados. Los arcos eléctricos pueden alcanzar temperaturas extremas y causar quemaduras graves o incendios. La corriente sigue las rutas conductoras disponibles según las diferencias de tensión y la impedancia; no existe una ley científica según la cual la electricidad siempre vaya hacia tierra. El número general de emergencias en Finlandia y la UE es 112."}
+      {
+        "title": "Magnitudes eléctricas",
+        "text": "corriente eléctrica — I — amperio (A)\ntensión / voltaje — U — voltio (V)\nresistencia — R — ohmio (Ω)\npotencia — P — vatio (W)"
+      },
+      {
+        "title": "Componentes y símbolos del circuito",
+        "text": "amperímetro — mide la corriente eléctrica\nvoltímetro — mide la tensión\ninterruptor — abre o cierra el circuito\ntoma de tierra de protección — conductor de seguridad\nbobina, transformador, lámpara, resistencia, cable / conductor, fusible\ndoble aislamiento, batería / fuente de tensión\nLos símbolos gráficos IEC normalizados quedan como mejora futura de la interfaz."
+      },
+      {
+        "title": "Seguridad eléctrica",
+        "text": "El cuerpo humano puede conducir electricidad. El agua, especialmente el agua corriente con iones disueltos, puede conducir electricidad y aumentar el peligro. La corriente a través del cuerpo puede interferir con el corazón, los músculos, los nervios y la respiración. Los equipos dañados y el manejo descuidado son peligrosos. La puesta a tierra de protección proporciona una ruta de baja resistencia para la corriente de fallo en sistemas adecuados. Los arcos eléctricos pueden alcanzar temperaturas extremas y causar quemaduras graves o incendios. La corriente sigue las rutas conductoras disponibles según las diferencias de tensión y la impedancia; no existe una ley científica según la cual la electricidad siempre vaya hacia tierra. El número general de emergencias en Finlandia y la UE es 112."
+      }
     ]
   },
   "wave_reference": {
     "title": "Ondas, sonido, luz y radiación",
     "sections": [
-      {"title": "Sonido", "text": "Aire ≈ 340 m/s; agua ≈ 1500 m/s. Eco/sonar: d = v · t / 2. Relámpago: 19 s ≈ 6,46 km."},
-      {"title": "Reflexión y amplitud", "text": "Extremo fijo: pulso invertido. Extremo libre: pulso no invertido. Sin extremo: no hay reflexión. La amplitud es el desplazamiento máximo respecto al equilibrio; una amplitud mayor hace la onda más alta, pero no cambia por sí sola la frecuencia."},
-      {"title": "Luz", "text": "La luz viaja aproximadamente en línea recta en un medio uniforme. Una sombra se forma al bloquear la luz. Reflexión, refracción, materiales transparentes; las superficies oscuras absorben más luz. La luz blanca contiene muchos colores. Un objeto rojo refleja principalmente luz roja. Velocidad: 299792458 m/s (≈ 300000 km/s)."},
-      {"title": "Radiación", "text": "Radiación ionizante: alfa, beta, gamma y rayos X. La radiación ultravioleta depende de la energía: la UV de alta energía puede ionizar. Radio y microondas son no ionizantes."},
-      {"title": "Seguridad UV", "text": "Riesgo para piel y ojos y mayor riesgo de cáncer de piel. Usa protector solar, ropa protectora, sombrero, gafas de sol y sombra; evita el sol más intenso del mediodía."}
+      {
+        "title": "Sonido",
+        "text": "Aire ≈ 340 m/s; agua ≈ 1500 m/s. Eco/sonar: d = v · t / 2. Relámpago: 19 s ≈ 6,46 km."
+      },
+      {
+        "title": "Reflexión y amplitud",
+        "text": "Extremo fijo: pulso invertido. Extremo libre: pulso no invertido. Sin extremo: no hay reflexión. La amplitud es el desplazamiento máximo respecto al equilibrio; una amplitud mayor hace la onda más alta, pero no cambia por sí sola la frecuencia."
+      },
+      {
+        "title": "Luz",
+        "text": "La luz viaja aproximadamente en línea recta en un medio uniforme. Una sombra se forma al bloquear la luz. Reflexión, refracción, materiales transparentes; las superficies oscuras absorben más luz. La luz blanca contiene muchos colores. Un objeto rojo refleja principalmente luz roja. Velocidad: 299792458 m/s (≈ 300000 km/s)."
+      },
+      {
+        "title": "Radiación",
+        "text": "Radiación ionizante: alfa, beta, gamma y rayos X. La radiación ultravioleta depende de la energía: la UV de alta energía puede ionizar. Radio y microondas son no ionizantes."
+      },
+      {
+        "title": "Seguridad UV",
+        "text": "Riesgo para piel y ojos y mayor riesgo de cáncer de piel. Usa protector solar, ropa protectora, sombrero, gafas de sol y sombra; evita el sol más intenso del mediodía."
+      }
     ]
   },
   "energy_reference": {
@@ -363,5 +423,6 @@
     "kinetic": "La energía cinética depende de la masa y la velocidad.",
     "potential": "La energía potencial gravitatoria depende de la masa, la gravedad y la altura.",
     "heat_transfer": "La energía térmica se transfiere por conducción, convección y radiación."
-  }
+  },
+  "chemistry_nav": "Química"
 }
