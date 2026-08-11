@@ -133,3 +133,4 @@ def test_physics_calculator_translations_exist() -> None:
         )
 
         assert required <= data.keys()
+        assert {"mechanics", "matter_energy", "electricity", "waves"} <= data["physics_formula_groups"].keys()

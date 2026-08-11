@@ -248,6 +248,14 @@
   "physics_title": "Calculadora de Física",
   "physics_intro": "Selecciona una relación física, elige la incógnita e introduce los valores conocidos.",
   "physics_formula": "Relación",
+  "physics_area": "Área",
+  "physics_calculation": "Cálculo",
+  "physics_formula_groups": {
+    "mechanics": "Movimiento y mecánica",
+    "matter_energy": "Materia y energía",
+    "electricity": "Electricidad",
+    "waves": "Ondas y sonido"
+  },
   "physics_expression": "Fórmula",
   "physics_solve_for": "Calcular",
   "physics_process": "Procedimiento",
@@ -327,6 +335,14 @@
     "lambda": "Longitud de onda",
     "T": "Período",
     "d": "Distancia"
+  },
+  "electricity_reference": {
+    "title": "Electricidad – magnitudes, componentes y seguridad",
+    "sections": [
+      {"title": "Magnitudes eléctricas", "text": "corriente eléctrica — I — amperio (A)\ntensión / voltaje — U — voltio (V)\nresistencia — R — ohmio (Ω)\npotencia — P — vatio (W)"},
+      {"title": "Componentes y símbolos del circuito", "text": "amperímetro — mide la corriente eléctrica\nvoltímetro — mide la tensión\ninterruptor — abre o cierra el circuito\ntoma de tierra de protección — conductor de seguridad\nbobina, transformador, lámpara, resistencia, cable / conductor, fusible\ndoble aislamiento, batería / fuente de tensión\nLos símbolos gráficos IEC normalizados quedan como mejora futura de la interfaz."},
+      {"title": "Seguridad eléctrica", "text": "El cuerpo humano puede conducir electricidad. El agua, especialmente el agua corriente con iones disueltos, puede conducir electricidad y aumentar el peligro. La corriente a través del cuerpo puede interferir con el corazón, los músculos, los nervios y la respiración. Los equipos dañados y el manejo descuidado son peligrosos. La puesta a tierra de protección proporciona una ruta de baja resistencia para la corriente de fallo en sistemas adecuados. Los arcos eléctricos pueden alcanzar temperaturas extremas y causar quemaduras graves o incendios. La corriente sigue las rutas conductoras disponibles según las diferencias de tensión y la impedancia; no existe una ley científica según la cual la electricidad siempre vaya hacia tierra. El número general de emergencias en Finlandia y la UE es 112."}
+    ]
   },
   "wave_reference": {
     "title": "Ondas, sonido, luz y radiación",

@@ -99,8 +99,10 @@ class FormulasView(QWidget):
                     )
                 )
 
-        reference = self.translations.get("wave_reference")
-        if reference:
+        references = [self.translations.get("electricity_reference"), self.translations.get("wave_reference")]
+        for reference in references:
+            if not reference:
+                continue
             card = QFrame()
             card.setObjectName("card")
             layout = QVBoxLayout(card)

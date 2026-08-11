@@ -49,6 +49,21 @@ FORMULA_ORDER = (
     "echo_distance",
 )
 
+FORMULA_GROUPS = {
+    "mechanics": (
+        "motion", "acceleration", "constant_acceleration", "free_fall",
+        "force", "weight", "work", "mechanical_power", "kinetic_energy",
+        "potential_energy",
+    ),
+    "matter_energy": (
+        "thermal_energy", "efficiency_energy", "efficiency_power", "density", "pressure",
+    ),
+    "electricity": ("ohm", "electric_power"),
+    "waves": ("wave_speed", "frequency_period", "sound_distance", "echo_distance"),
+}
+
+FORMULA_GROUP_ORDER = tuple(FORMULA_GROUPS)
+
 
 class PhysicsView(QWidget):
     def __init__(self) -> None:
@@ -82,6 +97,12 @@ class PhysicsView(QWidget):
         grid.setHorizontalSpacing(12)
         grid.setVerticalSpacing(9)
 
+        self.area_label = QLabel()
+        self.area_label.setObjectName("eyebrow")
+
+        self.area_combo = QComboBox()
+        self.area_combo.currentIndexChanged.connect(self._on_area_changed)
+
         self.formula_label = QLabel()
         self.formula_label.setObjectName("eyebrow")
 
@@ -104,14 +125,17 @@ class PhysicsView(QWidget):
             self._on_target_changed
         )
 
-        grid.addWidget(self.formula_label, 0, 0)
-        grid.addWidget(self.formula_combo, 0, 1, 1, 3)
+        grid.addWidget(self.area_label, 0, 0)
+        grid.addWidget(self.area_combo, 0, 1, 1, 3)
 
-        grid.addWidget(self.expression_label, 1, 0)
-        grid.addWidget(self.expression_value, 1, 1, 1, 3)
+        grid.addWidget(self.formula_label, 1, 0)
+        grid.addWidget(self.formula_combo, 1, 1, 1, 3)
 
-        grid.addWidget(self.target_label, 2, 0)
-        grid.addWidget(self.target_combo, 2, 1, 1, 3)
+        grid.addWidget(self.expression_label, 2, 0)
+        grid.addWidget(self.expression_value, 2, 1, 1, 3)
+
+        grid.addWidget(self.target_label, 3, 0)
+        grid.addWidget(self.target_combo, 3, 1, 1, 3)
 
         self.inputs_container = QWidget()
         self.inputs_layout = QGridLayout(self.inputs_container)
@@ -121,7 +145,7 @@ class PhysicsView(QWidget):
 
         grid.addWidget(
             self.inputs_container,
-            3,
+            4,
             0,
             1,
             4,
@@ -141,7 +165,7 @@ class PhysicsView(QWidget):
         actions.addWidget(self.calculate_button)
 
         actions.setContentsMargins(0, 12, 0, 0)
-        grid.addLayout(actions, 4, 0, 1, 4)
+        grid.addLayout(actions, 5, 0, 1, 4)
 
         root.addWidget(controls)
 
@@ -186,7 +210,8 @@ class PhysicsView(QWidget):
 
         self.title.setText(translations["physics_title"])
         self.intro.setText(translations["physics_intro"])
-        self.formula_label.setText(translations["physics_formula"])
+        self.area_label.setText(translations["physics_area"])
+        self.formula_label.setText(translations["physics_calculation"])
         self.expression_label.setText(
             translations["physics_expression"]
         )
@@ -201,30 +226,44 @@ class PhysicsView(QWidget):
         current_formula = self.current_formula
         current_target = self.current_target
 
-        self.formula_combo.blockSignals(True)
-        self.formula_combo.clear()
-
-        for key in FORMULA_ORDER:
-            name = translations["physics_formula_names"].get(
-                key,
-                translations.get("physics_formula_names_extra", {}).get(key, key),
-            )
-            self.formula_combo.addItem(
-                name,
-                key,
-            )
-
-        index = self.formula_combo.findData(current_formula)
-        self.formula_combo.setCurrentIndex(
-            index if index >= 0 else 0
-        )
-        self.formula_combo.blockSignals(False)
+        group = next((key for key, formulas in FORMULA_GROUPS.items() if current_formula in formulas), FORMULA_GROUP_ORDER[0])
+        self.area_combo.blockSignals(True)
+        self.area_combo.clear()
+        for key in FORMULA_GROUP_ORDER:
+            self.area_combo.addItem(translations["physics_formula_groups"][key], key)
+        self.area_combo.setCurrentIndex(self.area_combo.findData(group))
+        self.area_combo.blockSignals(False)
+        self._populate_formula_combo(current_formula)
 
         self._populate_targets(current_target)
         self._rebuild_inputs()
 
         if not self.result_value.text():
             self._reset_result()
+
+    def _populate_formula_combo(self, preferred: str | None = None) -> None:
+        group = self.area_combo.currentData() or FORMULA_GROUP_ORDER[0]
+        formulas = FORMULA_GROUPS[group]
+        self.formula_combo.blockSignals(True)
+        self.formula_combo.clear()
+        for key in formulas:
+            name = self.translations["physics_formula_names"].get(
+                key, self.translations.get("physics_formula_names_extra", {}).get(key, key)
+            )
+            self.formula_combo.addItem(name, key)
+        index = self.formula_combo.findData(preferred)
+        self.formula_combo.setCurrentIndex(index if index >= 0 else 0)
+        self.formula_combo.blockSignals(False)
+        self.current_formula = self.formula_combo.currentData() or formulas[0]
+
+    def _on_area_changed(self) -> None:
+        if not self.area_combo.currentData():
+            return
+        previous_target = self.current_target
+        self._populate_formula_combo()
+        self._populate_targets(previous_target)
+        self._rebuild_inputs()
+        self._reset_result()
 
     def _populate_targets(self, preferred: str | None = None) -> None:
         self.target_combo.blockSignals(True)
@@ -371,9 +410,9 @@ class PhysicsView(QWidget):
             values: dict[str, Decimal] = {}
 
             for variable, field in self.input_fields.items():
-                values[variable] = parse_decimal(
-                    field.text()
-                )
+                if not field.text().strip():
+                    continue
+                values[variable] = parse_decimal(field.text())
                 unit_combo = self.input_units.get(variable)
                 if unit_combo is not None:
                     values[variable] = to_si(

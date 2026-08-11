@@ -217,7 +217,7 @@ FORMULAS = (
     Formula(
         key="electric_power",
         category="electricity",
-        expression="P = U · I",
+        expression="P = U · I;  P = U² / R;  P = I² · R",
         variables=(
             ("P", "power", "W"),
             ("U", "voltage", "V"),

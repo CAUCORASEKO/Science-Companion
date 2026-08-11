@@ -27,7 +27,10 @@ def test_mechanical_power() -> None:
 
 
 def test_electric_power() -> None:
-    assert formula("electric_power").expression == "P = U · I"
+    expression = formula("electric_power").expression
+    assert "P = U · I" in expression
+    assert "P = U² / R" in expression
+    assert "P = I² · R" in expression
 
 
 def test_ohms_law() -> None:

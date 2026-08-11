@@ -248,6 +248,14 @@
   "physics_title": "Fysiikan laskin",
   "physics_intro": "Valitse fysiikan suureyhtälö, ratkaistava suure ja syötä tunnetut arvot.",
   "physics_formula": "Suureyhtälö",
+  "physics_area": "Alue",
+  "physics_calculation": "Lasku",
+  "physics_formula_groups": {
+    "mechanics": "Liike ja mekaniikka",
+    "matter_energy": "Aine ja energia",
+    "electricity": "Sähköoppi",
+    "waves": "Aallot ja ääni"
+  },
   "physics_expression": "Kaava",
   "physics_solve_for": "Laske",
   "physics_process": "Ratkaisuvaiheet",
@@ -327,6 +335,14 @@
     "lambda": "Aallonpituus",
     "T": "Jaksonaika",
     "d": "Etäisyys"
+  },
+  "electricity_reference": {
+    "title": "Sähköoppi – suureet, komponentit ja turvallisuus",
+    "sections": [
+      {"title": "Sähkösuureet", "text": "sähkövirta — I — ampeeri (A)\njännite — U — voltti (V)\nresistanssi — R — ohmi (Ω)\nteho — P — watti (W)"},
+      {"title": "Piirikomponentit ja symbolit", "text": "virtamittari (ampeerimittari) — mittaa sähkövirtaa\njännitemittari — mittaa jännitettä\nkatkaisija / kytkin — avaa tai sulkee piirin\nsuojamaadoitus — turvallisuutta parantava maadoitusjohdin\nkäämi, muuntaja, lamppu, vastus, sähköjohto / johdin, sulake\nsuojaeristys, paristo / jännitelähde\nGraafiset IEC-standardin mukaiset symbolit ovat tuleva käyttöliittymäparannus."},
+      {"title": "Sähköturvallisuus", "text": "Ihmiskeho voi johtaa sähköä. Vesi, erityisesti liuenneita ioneja sisältävä tavallinen vesi, voi johtaa sähköä ja lisätä vaaraa. Kehon läpi kulkeva virta voi häiritä sydäntä, lihaksia, hermoja ja hengitystä. Vaurioituneet sähkölaitteet ja huolimaton käsittely ovat vaarallisia. Suojamaadoitus tarjoaa asianmukaisissa sähköjärjestelmissä pieniresistanssisen vikavirtareitin. Sähkökaaret voivat olla erittäin kuumia ja aiheuttaa vakavia palovammoja tai tulipalon. Virta kulkee käytettävissä olevia johtavia reittejä pitkin jännite-erojen ja impedanssin mukaan — sähkö ei aina kulje kohti maata. Yleinen hätänumero Suomessa ja EU:ssa on 112."}
+    ]
   },
   "wave_reference": {
     "title": "Aallot, ääni, valo ja säteily",

@@ -183,6 +183,21 @@ def test_electric_power() -> None:
     assert result.unit == "W"
 
 
+def test_electric_power_from_voltage_and_resistance() -> None:
+    result = solve_physics("electric_power", "P", {"U": Decimal("24"), "R": Decimal("8")})
+    assert result.value == Decimal("72")
+
+
+def test_electric_power_second_example() -> None:
+    result = solve_physics("electric_power", "P", {"U": Decimal("25"), "R": Decimal("5")})
+    assert result.value == Decimal("125")
+
+
+def test_ohm_examples() -> None:
+    assert solve_physics("ohm", "I", {"U": Decimal("24"), "R": Decimal("8")}).value == Decimal("3")
+    assert solve_physics("ohm", "I", {"U": Decimal("25"), "R": Decimal("5")}).value == Decimal("5")
+
+
 def test_voltage_from_ohms_law() -> None:
     result = solve_physics(
         "ohm",

@@ -100,6 +100,7 @@ RESULT_UNITS = {
     ("electric_power", "P"): "W",
     ("electric_power", "U"): "V",
     ("electric_power", "I"): "A",
+    ("electric_power", "R"): "Ω",
 
     # Ohm
     ("ohm", "U"): "V",
@@ -135,7 +136,7 @@ FORMULA_LABELS = {
     "efficiency_power": "η = P_out / P_in · 100",
     "density": "ρ = m / V",
     "pressure": "p = F / A",
-    "electric_power": "P = U · I",
+    "electric_power": "P = U · I  ·  P = U² / R  ·  P = I² · R",
     "ohm": "U = R · I",
     "wave_speed": "v = f · λ",
     "frequency_period": "f = 1 / T",
@@ -160,7 +161,7 @@ VARIABLES = {
     "efficiency_power": ("eta", "Pout", "Pin"),
     "density": ("rho", "m", "V"),
     "pressure": ("p", "F", "A"),
-    "electric_power": ("P", "U", "I"),
+    "electric_power": ("P", "U", "I", "R"),
     "ohm": ("U", "R", "I"),
     "wave_speed": ("v", "f", "lambda"),
     "frequency_period": ("f", "T"),
@@ -216,6 +217,15 @@ def solve_physics(
         raise ValueError("unknown_variable")
 
     required = [v for v in variables if v != solve_for]
+
+    # Electric power is one formula family with equivalent input pairs.
+    if formula_key == "electric_power":
+        required = []
+        if solve_for == "P":
+            if not (("U" in values and "I" in values) or ("U" in values and "R" in values) or ("I" in values and "R" in values)):
+                raise ValueError("missing_value:electric_power_pair")
+        elif not (("P" in values and "U" in values) or ("P" in values and "R" in values) or ("U" in values and "I" in values)):
+            raise ValueError("missing_value:electric_power_pair")
 
     for variable in required:
         if variable not in values:
@@ -566,14 +576,26 @@ def _solve_electric_power(
     v: dict[str, Decimal],
 ) -> Decimal:
     if solve_for == "P":
-        return v["U"] * v["I"]
+        if "U" in v and "I" in v:
+            return v["U"] * v["I"]
+        if "U" in v and "R" in v:
+            _require_nonzero(v["R"], "R")
+            return v["U"] * v["U"] / v["R"]
+        _require_nonzero(v["R"], "R")
+        return v["I"] * v["I"] * v["R"]
 
     if solve_for == "U":
-        _require_nonzero(v["I"], "I")
-        return v["P"] / v["I"]
+        if "I" in v:
+            _require_nonzero(v["I"], "I")
+            return v["P"] / v["I"]
+        _require_nonzero(v["R"], "R")
+        return (v["P"] * v["R"]).sqrt()
 
-    _require_nonzero(v["U"], "U")
-    return v["P"] / v["U"]
+    if "U" in v:
+        _require_nonzero(v["U"], "U")
+        return v["P"] / v["U"]
+    _require_nonzero(v["R"], "R")
+    return (v["P"] / v["R"]).sqrt()
 
 
 def _solve_ohm(
@@ -790,10 +812,20 @@ def _build_substitution(
 
     if formula_key == "electric_power":
         if solve_for == "P":
-            return f"P = {formatted_values['U']} · {formatted_values['I']}"
+            if "I" in formatted_values:
+                return f"P = {formatted_values['U']} · {formatted_values['I']}"
+            if "R" in formatted_values:
+                return f"P = {formatted_values['U']}² / {formatted_values['R']}"
+            return f"P = {formatted_values['I']}² · {formatted_values['R']}"
         if solve_for == "U":
-            return f"U = {formatted_values['P']} / {formatted_values['I']}"
-        return f"I = {formatted_values['P']} / {formatted_values['U']}"
+            if "I" in formatted_values:
+                return f"U = {formatted_values['P']} / {formatted_values['I']}"
+            return f"U = √({formatted_values['P']} · {formatted_values['R']})"
+        if solve_for == "I":
+            if "U" in formatted_values:
+                return f"I = {formatted_values['P']} / {formatted_values['U']}"
+            return f"I = √({formatted_values['P']} / {formatted_values['R']})"
+        return f"R = {formatted_values['U']}² / {formatted_values['P']}"
 
     if formula_key == "ohm":
         if solve_for == "U":
